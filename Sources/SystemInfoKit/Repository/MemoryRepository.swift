@@ -62,11 +62,11 @@ final class MemoryRepositoryImpl: MemoryRepository {
         let external    = Double(load.external_page_count) * unit
         let using       = active + inactive + speculative + wired + compressed - purgeable - external
 
-        result.value = min(99.9, (100.0 * using / maxMem).round2dp)
-        result.setPressureValue((100.0 * (wired + compressed) / maxMem).round2dp)
-        result.setAppValue((using - wired - compressed).round2dp)
-        result.setWiredValue(wired.round2dp)
-        result.setCompressedValue(compressed.round2dp)
+        result.value = min(99.9, (100.0 * using / maxMem))
+        result.setPressureValue((100.0 * (wired + compressed) / maxMem))
+        result.setAppValue((using - wired - compressed))
+        result.setWiredValue(wired)
+        result.setCompressedValue(compressed)
     }
 
     func reset() {
