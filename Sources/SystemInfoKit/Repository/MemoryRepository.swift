@@ -10,7 +10,9 @@ protocol MemoryRepository: AnyObject {
 }
 
 final class MemoryRepositoryImpl: MemoryRepository {
+    
     var current = MemoryInfo()
+    private let kiloByte: Double = 1_024 // 2^10
     private let gigaByte: Double = 1_073_741_824 // 2^30
     private let hostVmInfo64Count: mach_msg_type_number_t!
     private let hostBasicInfoCount: mach_msg_type_number_t!
@@ -52,7 +54,7 @@ final class MemoryRepositoryImpl: MemoryRepository {
         let maxMem = maxMemory
         let load = vmStatistics64
 
-        let unit        = Double(vm_kernel_page_size) / gigaByte
+        let unit        = Double(vm_kernel_page_size) / kiloByte
         let active      = Double(load.active_count) * unit
         let speculative = Double(load.speculative_count) * unit
         let inactive    = Double(load.inactive_count) * unit
